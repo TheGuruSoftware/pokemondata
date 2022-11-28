@@ -1,21 +1,31 @@
 import Head from 'next/head'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import BlurImage from '../components/BlurImage'
 
 export default function Pokemons() {
-    const [pokemons, setPokemons] = useState([]);
+    const [pokemons, setPokemons] = useState([])
     useEffect(() => {
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=151')
             .then(res => {
-                setPokemons(res.data.results);
+                var data = res.data.results
+                data = data.sort(function (a, b) {
+                    return a.name.localeCompare(b.name)
+                })
+                data.forEach(p => {
+                    p.id = (p.url.slice(0, -1))
+                    p.id = p.id.slice(p.id.lastIndexOf('/') + 1)
+                })
+                setPokemons(data)
             })
             .catch(err => {
-                console.log(err);
-                alert('Error: ' + err);
+                console.log(err)
+                alert('Error: ' + err)
             })
-    }, []);
+
+    }, [])
     return (
-        <div className='bg-w-2 w-full min-h-screen bg-cover md:bg-center bg-right-top'>
+        <div className='bg-w-2 bg-fixed h-full bg-cover md:bg-center bg-right-top'>
             <Head>
                 <title>PokeData - Pokemony</title>
                 <meta name="description" content="Pokemons" />
@@ -23,15 +33,25 @@ export default function Pokemons() {
             </Head>
             <div className='py-9'>
             </div>
-            <main className='container mx-auto p-2'>
-                {pokemons?.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
-                }).map((pokemon, index) => {
-                    return (
-                        <div key={index} className='bg-black/25 backdrop-blur border border-amber-400/25 p-2 rounded-md mb-2 uppercase'>
-                            {pokemon.name}
+            <main className='mx-auto p-2 max-w-5xl'>
+                {pokemons?.map((pokemon, index) => {
+                    return (<div key={index} >
+                        <div className='flex gap-8 p-4 rounded text-light from-light/40 to-primary/40 bg-gradient-to-br backdrop-blur'>
+                            <div>
+                                <h3 className='text-center uppercase'>
+                                    {pokemon.name}
+                                    <hr className='spacer-primary via-secondary'></hr>
+                                </h3>
+                                <div className='p-2'>
+                                    <BlurImage src={`https://github.com/PokeAPI/sprites/raw/master/sprites/pokemon/${pokemon.id}.png`} width={128} height={128} alt={`${pokemon.id}.png`} />
+                                </div>
+                            </div>
+                            <div>
+                                {pokemon.id}
+                            </div>
                         </div>
-                    )
+                        <hr className='spacer-primary via-light my-4 h-[3px]'></hr>
+                    </div>)
                 })}
             </main>
         </div>

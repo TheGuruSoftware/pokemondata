@@ -2,5 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-.bgwi {
+@layer base {
+	:root {
+		--color-primary: 11, 21, 32;
+		--color-secondary: 254, 202, 100;
+		--color-hard: 255, 151, 8;
+		--color-light: 25, 40, 55;
+		--color-text-primary: 255, 151, 8;
+		--color-text-light: 254, 202, 100;
+		--color-text-secondary: 253, 69, 8;
+		--color-text-hover: 253, 69, 8;
+		--color-text-muted: 253, 69, 8;
+		--color-border-primary: 255, 151, 8;
+		--color-border-secondary: 11, 21, 32;
+		--color-border-hover: 253, 69, 8;
+		--color-border-hard: 254, 202, 100;
+		--color-border-light: 11, 21, 32;
+		--color-outline-primary: 255, 151, 8;
+		--color-outline-secondary: 11, 21, 32;
+		--color-outline-hover: 253, 69, 8;
+		--color-outline-hard: 255, 151, 8;
+		--color-outline-light: 11, 21, 32;
+	}
+}
+
+@layer components {
+	.btn-primary {
+		@apply text-lg text-primary p-2 cursor-pointer hover:text-hover transition font-semibold border-transparent border-4 rounded-md hover:border-primary border-t-0 border-b-0;
+	}
+	.spacer-primary {
+		@apply my-2 from-transparent via-hard to-transparent bg-gradient-to-r border-0 h-px;
+	}
 }

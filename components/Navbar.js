@@ -1,25 +1,25 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function Navbar({ children }) {
     return (
-        <nav className='fixed left-0 top-0 w-full bg-amber-400/25 backdrop-blur border-b border-amber-400/25 z-40'>
+        <nav className='fixed left-0 top-0 w-full from-light/40 to-primary/40 bg-gradient-to-t backdrop-blur border-b border-primary/25 z-40'>
             <div className='justify-between flex align-middle items-center p-3 container mx-auto'>
                 <Link href='/'>
-                    <h3 className='text-2xl font-bold text-white hover:text-amber-200 transition p-2'>PokeData</h3>
+                    <h3 className='btn-primary text-2xl p-2 font-bold duration-300 border-none'>PokeData</h3>
                 </Link>
-                <div className='flex gap-0 md:gap-4'>
+                <div className='flex gap-0 md:gap-6'>
                     <Link href='/pokemons'>
-                        <div className='text-white p-2 cursor-pointer hover:text-amber-400 transition'>Pokemony</div>
+                        <div className='btn-primary'>Pokemony</div>
                     </Link>
                     <Link href='/abilities'>
-                        <div className='text-white p-2 cursor-pointer hover:text-amber-400 transition'>Umiejętności</div>
+                        <div className='btn-primary'>Umiejętności</div>
                     </Link>
                     <Link href='/gallery'>
-                        <div className='text-white p-2 cursor-pointer hover:text-amber-400 transition'>Galeria</div>
+                        <div className='btn-primary'>Galeria</div>
                     </Link>
                 </div>
             </div>
             {children}
         </nav>
-    );
+    )
 }
