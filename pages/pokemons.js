@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import BlurImage from '../components/BlurImage'
 
 export default function Pokemons() {
+    /* Zrobić to jako crud i server based data */
     const [pokemons, setPokemons] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
